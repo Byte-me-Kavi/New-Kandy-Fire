@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Globe } from "lucide-react";
 
 const languages = [
@@ -11,14 +11,18 @@ const languages = [
 declare global {
   interface Window {
     googleTranslateElementInit?: () => void;
-    google?: any;
+    google?: {
+      translate?: {
+        // constructor signature for the Google Translate element
+        TranslateElement?: new (opts: unknown, id: string) => unknown;
+      };
+    };
   }
 }
 
 export default function GoogleTranslate() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
-  const retryCountRef = useRef(0);
   const maxRetries = 20; // Maximum 4 seconds (20 * 200ms)
 
   // Clear Google Translate cookies
@@ -52,36 +56,41 @@ export default function GoogleTranslate() {
   };
 
   // Set Google Translate language with retry limit
-  const setGoogleTranslateLanguage = (lang: string, retries: number = 0) => {
-    if (!lang || lang === "en") {
-      console.log("Resetting to English - reloading page");
-      clearGoogleTranslateCookies();
-      localStorage.setItem("langPref", "en");
-      window.location.reload();
-      return;
-    }
-
-    const combo = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    if (!combo) {
-      if (retries < maxRetries) {
-        console.log(
-          `Google Translate not ready, retrying... (${
-            retries + 1
-          }/${maxRetries})`
-        );
-        setTimeout(() => setGoogleTranslateLanguage(lang, retries + 1), 200);
-      } else {
-        console.error(
-          "Google Translate failed to initialize after maximum retries"
-        );
+  const setGoogleTranslateLanguage = useCallback(
+    (lang: string, retries: number = 0) => {
+      if (!lang || lang === "en") {
+        console.log("Resetting to English - reloading page");
+        clearGoogleTranslateCookies();
+        localStorage.setItem("langPref", "en");
+        window.location.reload();
+        return;
       }
-      return;
-    }
 
-    console.log("Setting language to:", lang);
-    combo.value = lang;
-    combo.dispatchEvent(new Event("change"));
-  };
+      const combo = document.querySelector(
+        ".goog-te-combo"
+      ) as HTMLSelectElement | null;
+      if (!combo) {
+        if (retries < maxRetries) {
+          console.log(
+            `Google Translate not ready, retrying... (${
+              retries + 1
+            }/${maxRetries})`
+          );
+          setTimeout(() => setGoogleTranslateLanguage(lang, retries + 1), 200);
+        } else {
+          console.error(
+            "Google Translate failed to initialize after maximum retries"
+          );
+        }
+        return;
+      }
+
+      console.log("Setting language to:", lang);
+      combo.value = lang;
+      combo.dispatchEvent(new Event("change"));
+    },
+    []
+  );
 
   useEffect(() => {
     // Check if script already loaded
@@ -97,8 +106,9 @@ export default function GoogleTranslate() {
 
     // Initialize Google Translate
     window.googleTranslateElementInit = () => {
-      if (window.google && window.google.translate) {
-        new window.google.translate.TranslateElement(
+      const TranslateElement = window.google?.translate?.TranslateElement;
+      if (typeof TranslateElement === "function") {
+        new TranslateElement(
           {
             pageLanguage: "en",
             includedLanguages: "en,si,ta",
@@ -121,7 +131,7 @@ export default function GoogleTranslate() {
         }
       }, 800);
     }
-  }, []);
+  }, [setGoogleTranslateLanguage]);
 
   const handleLanguageChange = (code: string) => {
     setSelectedLang(code);

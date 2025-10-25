@@ -83,12 +83,28 @@ html {
 }
 
 @keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
+  /* smooth single-peak bounce using GPU-accelerated translate3d */
+  0% {
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-40px);
+    transform: translate3d(0, -60px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Dot-specific bounce: smaller amplitude and longer duration for smooth staggered motion */
+@keyframes dot-bounce {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -121,6 +137,20 @@ html {
   animation: pulse-slow 2s ease-in-out infinite;
 }
 
+/* Override Tailwind's animate-bounce with a smoother bounce for our loader.
+   Slightly longer duration helps staggered elements avoid perceivable stutter. */
+.animate-bounce {
+  animation: bounce 0.5s cubic-bezier(0.5, 1, 0.5, 1) infinite;
+  will-change: transform;
+}
+
+/* Smooth loader dot animation (use this for small indicators to avoid reflow/stutter).
+   Longer duration and smaller translate reduces perceived stutter when staggered. */
+.dot-bounce {
+  animation: dot-bounce 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform;
+}
+
 .animate-bounce-slow {
   animation: bounce-slow 2s ease-in-out infinite;
 }
@@ -140,6 +170,20 @@ html {
 
 .animation-delay-400 {
   animation-delay: 0.4s;
+}
+
+/* Negative delays: start animations already offset so all children are phase-aligned
+   (avoids independent start jitter — produces a smooth parent-synchronized wave). */
+.animation-delay-neg-200 {
+  animation-delay: -0.2s;
+}
+
+.animation-delay-neg-400 {
+  animation-delay: -0.4s;
+}
+
+.animation-delay-neg-600 {
+  animation-delay: -0.6s;
 }
 
 /* New Loading Animations */
@@ -310,6 +354,10 @@ html {
 
 .animation-delay-500 {
   animation-delay: 0.5s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
 }
 
 /* Fire SVG Animation */

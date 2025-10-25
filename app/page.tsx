@@ -88,7 +88,7 @@ export default function Home() {
       name: "Hela",
       category: "Manufacturing",
       description:
-        "Complete fire safety system installation including fire extinguishers, alarm systems, and emergency evacuation planning for Sri Lanka's leading apparel manufacturer.",
+        "Complete fire safety system installation including fire extinguishers, alarm systems, and emergency evacuation planning for Sri Lanka&apos;s leading apparel manufacturer.",
       image: "/images/projects/hela.png",
     },
     {
@@ -102,7 +102,7 @@ export default function Home() {
       name: "Crysbro",
       category: "Food Processing",
       description:
-        "Industrial-grade fire suppression systems and safety equipment installation for one of Sri Lanka's largest poultry processing facilities.",
+        "Industrial-grade fire suppression systems and safety equipment installation for one of Sri Lanka&apos;s largest poultry processing facilities.",
       image: "/images/projects/crysbro.webp",
     },
     {
@@ -129,12 +129,12 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-image-[url('/images/white-bg.jpg')]">
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-24 pb-20">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white to-white z-10" />
           <Image
             src="/images/hero-bg.jpg"
             alt="Fire Safety Equipment"
@@ -145,10 +145,10 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-image-url['/images/white-bg.jpg']">
             {/* Left Side - Text Content */}
-            <div className="backdrop-blur-md bg-white/10 rounded-3xl p-6 md:p-9 border border-white/20 shadow-2xl">
+            <div className="backdrop-blur-md bg-white/10 rounded-3xl p-6 md:p-9 border-2 border-red-600 shadow-2xl">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 animate-fade-in-up">
                 Trusted Fire Safety Solutions
                 <span className="block text-red-400 mt-2">in Sri Lanka</span>
@@ -339,7 +339,8 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  About <br /><span className="text-red-600">New Kandy Fire</span>
+                  About <br />
+                  <span className="text-red-600">New Kandy Fire</span>
                 </h2>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   New Kandy Fire has been dedicated since 2015 to delivering
@@ -432,7 +433,7 @@ export default function Home() {
               Our Past Projects
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Trusted by Sri Lanka's leading brands and organizations
+              Trusted by Sri Lanka&apos;s leading brands and organizations
             </p>
           </div>
 

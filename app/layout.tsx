@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
-// @ts-ignore: allow side-effect import of global CSS without a declaration file
+// @ts-expect-error: allow side-effect import of global CSS without a declaration file
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
