@@ -1,48 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-inter: "Inter", sans-serif;
-  --font-montserrat: "Montserrat", sans-serif;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.55 0.22 25);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.55 0.22 25);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.55 0.22 25);
+  --chart-1: oklch(0.55 0.22 25);
+  --chart-2: oklch(0.5 0.15 250);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.55 0.22 25);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.145 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
+  /* Adding custom fonts from user's setup */
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Inter", sans-serif;
+
+  /* Adding fire safety color system with red, blue, white, black */
+  --color-red-primary: #dc2626;
+  --color-red-dark: #b91c1c;
+  --color-red-light: #ef4444;
+  --color-blue-accent: #3b82f6;
+  --color-blue-dark: #2563eb;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-inter);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-blue-accent: #3b82f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-  }
+/* Smooth scrolling and better mobile text rendering */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  /* Adding custom font family */
+  font-family: "Inter", sans-serif;
 }
 
+/* Adding Montserrat for headings */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-montserrat);
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-/* Custom scrollbar */
+/* Adding custom red-themed scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -60,7 +176,7 @@ html {
   background: #b91c1c;
 }
 
-/* Custom Animations */
+/* Adding all custom animations from user's file */
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);
@@ -83,7 +199,6 @@ html {
 }
 
 @keyframes bounce {
-  /* smooth single-peak bounce using GPU-accelerated translate3d */
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -95,7 +210,6 @@ html {
   }
 }
 
-/* Dot-specific bounce: smaller amplitude and longer duration for smooth staggered motion */
 @keyframes dot-bounce {
   0% {
     transform: translate3d(0, 0, 0);
@@ -129,64 +243,6 @@ html {
   }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 2s ease-in-out infinite;
-}
-
-/* Override Tailwind's animate-bounce with a smoother bounce for our loader.
-   Slightly longer duration helps staggered elements avoid perceivable stutter. */
-.animate-bounce {
-  animation: bounce 0.5s cubic-bezier(0.5, 1, 0.5, 1) infinite;
-  will-change: transform;
-}
-
-/* Smooth loader dot animation (use this for small indicators to avoid reflow/stutter).
-   Longer duration and smaller translate reduces perceived stutter when staggered. */
-.dot-bounce {
-  animation: dot-bounce 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  will-change: transform;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.animate-fade-in-up-delay {
-  animation: fade-in-up 0.8s ease-out 0.3s forwards;
-  opacity: 0;
-}
-
-.animation-delay-200 {
-  animation-delay: 0.2s;
-}
-
-.animation-delay-400 {
-  animation-delay: 0.4s;
-}
-
-/* Negative delays: start animations already offset so all children are phase-aligned
-   (avoids independent start jitter — produces a smooth parent-synchronized wave). */
-.animation-delay-neg-200 {
-  animation-delay: -0.2s;
-}
-
-.animation-delay-neg-400 {
-  animation-delay: -0.4s;
-}
-
-.animation-delay-neg-600 {
-  animation-delay: -0.6s;
-}
-
-/* New Loading Animations */
 @keyframes float {
   0%,
   100% {
@@ -244,27 +300,6 @@ html {
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-scale-pulse {
-  animation: scale-pulse 2s ease-in-out infinite;
-}
-
-.animate-slide-right {
-  animation: slide-right 2s ease-in-out infinite;
-}
-
-.animate-slide-left {
-  animation: slide-left 2s ease-in-out infinite;
-}
-
-.animate-progress {
-  animation: progress 1.5s ease-in-out infinite;
-}
-
-/* Fire Flicker Animations */
 @keyframes flicker-1 {
   0%,
   100% {
@@ -317,19 +352,6 @@ html {
   }
 }
 
-.animate-flicker-1 {
-  animation: flicker-1 1.5s ease-in-out infinite;
-}
-
-.animate-flicker-2 {
-  animation: flicker-2 1.8s ease-in-out infinite;
-}
-
-.animate-flicker-3 {
-  animation: flicker-3 2s ease-in-out infinite;
-}
-
-/* Flame Rising Animation */
 @keyframes flame-rise {
   0% {
     transform: translateY(0) scaleY(1);
@@ -344,23 +366,6 @@ html {
   }
 }
 
-.animate-flame-rise {
-  animation: flame-rise 1.5s ease-out infinite;
-}
-
-.animation-delay-300 {
-  animation-delay: 0.3s;
-}
-
-.animation-delay-500 {
-  animation-delay: 0.5s;
-}
-
-.animation-delay-600 {
-  animation-delay: 0.6s;
-}
-
-/* Fire SVG Animation */
 @keyframes fire-flicker {
   0%,
   100% {
@@ -381,11 +386,6 @@ html {
   }
 }
 
-.animate-fire-flicker {
-  animation: fire-flicker 2s ease-in-out infinite;
-}
-
-/* Mobile Menu Animations */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -408,6 +408,78 @@ html {
   }
 }
 
+/* Adding animation utility classes */
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 0.5s cubic-bezier(0.5, 1, 0.5, 1) infinite;
+  will-change: transform;
+}
+
+.dot-bounce {
+  animation: dot-bounce 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay {
+  animation: fade-in-up 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-right {
+  animation: slide-right 2s ease-in-out infinite;
+}
+
+.animate-slide-left {
+  animation: slide-left 2s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-in-out infinite;
+}
+
+.animate-flicker-1 {
+  animation: flicker-1 1.5s ease-in-out infinite;
+}
+
+.animate-flicker-2 {
+  animation: flicker-2 1.8s ease-in-out infinite;
+}
+
+.animate-flicker-3 {
+  animation: flicker-3 2s ease-in-out infinite;
+}
+
+.animate-flame-rise {
+  animation: flame-rise 1.5s ease-out infinite;
+}
+
+.animate-fire-flicker {
+  animation: fire-flicker 2s ease-in-out infinite;
+}
+
 .animate-slideDown {
   animation: slideDown 0.3s ease-out forwards;
 }
@@ -417,8 +489,67 @@ html {
   opacity: 0;
 }
 
-/* globals.css */
-/* Hide Google Translate banner and branding */
+/* Adding animation delay utilities */
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-neg-200 {
+  animation-delay: -0.2s;
+}
+
+.animation-delay-neg-400 {
+  animation-delay: -0.4s;
+}
+
+.animation-delay-neg-600 {
+  animation-delay: -0.6s;
+}
+
+@layer utilities {
+  .bg-pattern-dots {
+    background-image: radial-gradient(circle, #e5e5e5 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .bg-pattern-grid {
+    background-image: linear-gradient(#f5f5f5 1px, transparent 1px),
+      linear-gradient(90deg, #f5f5f5 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-red-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  }
+
+  .bg-red-pattern {
+    background-color: #dc2626;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
+    background-size: 30px 30px;
+  }
+}
+
+/* Adding Google Translate hiding styles */
 .goog-te-banner-frame {
   display: none !important;
   visibility: hidden !important;
@@ -446,12 +577,10 @@ div#goog-gt- {
   display: none !important;
 }
 
-/* Hide the top frame that Google Translate adds */
 #google_translate_element {
   display: none !important;
 }
 
-/* Override the body top position that Google adds */
 body > .skiptranslate {
   display: none !important;
 }

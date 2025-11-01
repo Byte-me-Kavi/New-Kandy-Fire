@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -7,16 +6,7 @@ import { Suspense } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import InitialLoader from "./components/InitialLoader";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
+// Fonts are loaded via CSS @import in globals.css
 
 export const metadata: Metadata = {
   title: "New Kandy Fire - Fire Safety Solutions Sri Lanka",
@@ -36,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
+      <body className={`antialiased`}>
         <InitialLoader>
           <Navbar />
           <Suspense fallback={<LoadingSpinner />}>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSlider from "./components/HeroSlider";
 import {
   Flame,
   Shield,
@@ -88,7 +89,7 @@ export default function Home() {
       name: "Hela",
       category: "Manufacturing",
       description:
-        "Complete fire safety system installation including fire extinguishers, alarm systems, and emergency evacuation planning for Sri Lanka&apos;s leading apparel manufacturer.",
+        "Complete fire safety system installation including fire extinguishers, alarm systems, and emergency evacuation planning for Sri Lanka's leading apparel manufacturer.",
       image: "/images/projects/hela.png",
     },
     {
@@ -102,7 +103,7 @@ export default function Home() {
       name: "Crysbro",
       category: "Food Processing",
       description:
-        "Industrial-grade fire suppression systems and safety equipment installation for one of Sri Lanka&apos;s largest poultry processing facilities.",
+        "Industrial-grade fire suppression systems and safety equipment installation for one of Sri Lanka's largest poultry processing facilities.",
       image: "/images/projects/crysbro.webp",
     },
     {
@@ -129,199 +130,230 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-24 pb-20">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white to-white z-10" />
-          <Image
-            src="/images/hero-bg.jpg"
-            alt="Fire Safety Equipment"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+    <main className="min-h-screen bg-background">
+      {/* Hero Section - Redesigned */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-red-50">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-red-500/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-orange-500/10 blur-[120px] rounded-full" />
 
-        {/* Hero Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full ">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-image-url['/images/white-bg.jpg']">
+        {/* Content Container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Text Content */}
-            <div className="backdrop-blur-md bg-white/10 rounded-3xl p-6 md:p-9 border-2 border-red-600 shadow-2xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 animate-fade-in-up">
-                Trusted Fire Safety Solutions
-                <span className="block text-red-400 mt-2">in Sri Lanka</span>
-              </h1>
-              <p className="text-lg md:text-xl text-gray-700 mb-8 animate-fade-in-up-delay">
-                Complete fire protection systems, equipment and servicing by New
-                Kandy Fire safeguarding lives, property & business since 2015.
+            <div className="space-y-6">
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-red-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                <Shield className="w-5 h-5" />
+                <span className="text-sm font-semibold">
+                  Certified Fire Safety Experts Since 2015
+                </span>
+              </div>
+
+              {/* Main Heading */}
+              <div className="space-y-4">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 leading-[1.1]">
+                  Your Safety
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-red-700">
+                    Our Priority
+                  </span>
+                </h1>
+                <div className="w-24 h-1.5 bg-gradient-to-r from-red-600 to-orange-600 rounded-full shadow-md" />
+              </div>
+
+              {/* Description */}
+              <p className="text-xl text-gray-700 leading-relaxed max-w-xl">
+                Complete fire protection solutions across Sri Lanka. From
+                advanced detection systems to comprehensive training programs—we
+                protect what matters most.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up-delay">
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link
                   href="/contact"
-                  className="group relative bg-red-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden"
+                  className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-red-700 hover:to-orange-700 hover:scale-105 shadow-lg hover:shadow-2xl hover:shadow-red-600/30 transition-all duration-300"
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Get a Free Quote
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <span className="absolute inset-0 bg-red-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-full"></span>
+                  <Phone className="w-5 h-5" />
+                  Get Emergency Service
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/services"
-                  className="backdrop-blur-md bg-white/20 text-red-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-red-100 transition-all duration-300 shadow-lg border border-red-500"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all duration-300 border-2 border-gray-300 hover:border-red-600 shadow-md hover:shadow-lg"
                 >
                   View Services
                 </Link>
               </div>
+
+              {/* Stats Row - Redesigned */}
+              <div className="grid grid-cols-3 gap-6 pt-8">
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
+                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                      10+
+                    </div>
+                    <div className="text-sm text-gray-600 font-semibold mt-1">
+                      Years Experience
+                    </div>
+                  </div>
+                </div>
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
+                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                      500+
+                    </div>
+                    <div className="text-sm text-gray-600 font-semibold mt-1">
+                      Projects Done
+                    </div>
+                  </div>
+                </div>
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
+                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                      24/7
+                    </div>
+                    <div className="text-sm text-gray-600 font-semibold mt-1">
+                      Support
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Right Side - Hero Image */}
-            <div className="hidden lg:block">
-              <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md bg-white/10 border border-white/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-gray-900/40 z-10"></div>
-                <Image
-                  src="/images/hero-img.png"
-                  alt="Fire Safety Professional"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                {/* Floating Badge */}
-                <div className="absolute bottom-8 left-8 z-20 backdrop-blur-lg bg-white/20 rounded-2xl p-4 border border-white/30">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                      <Shield className="w-6 h-6 text-white" />
+            {/* Right Side - Hero Slider with Enhanced Design */}
+            <div className="relative -mt-12 lg:ml-8">
+              {/* Glow effect behind slider */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-red-500/20 to-orange-500/20 blur-3xl rounded-full scale-110" />
+
+              {/* Slider container with border */}
+              <div className="relative rounded-2xl overflow-hidden border-4 border-gray-200 shadow-2xl hover:border-red-400 hover:shadow-red-600/20 transition-all duration-500">
+                <HeroSlider />
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -bottom-16 -left-6 bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-4 rounded-xl shadow-2xl border-4 border-white hover:scale-110 transition-transform">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <Flame className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold opacity-90">
+                      Certified By
                     </div>
-                    <div>
-                      <p className="text-white font-bold text-lg">10+ Years</p>
-                      <p className="text-white text-sm">of Excellence</p>
-                    </div>
+                    <div className="text-lg font-black">NFPA Standards</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 animate-float">
-          <div className="w-20 h-20 bg-red-500/20 rounded-full blur-xl"></div>
-        </div>
-        <div className="absolute bottom-20 right-10 animate-float animation-delay-200">
-          <div className="w-32 h-32 bg-orange-500/20 rounded-full blur-xl"></div>
-        </div>
       </section>
 
-      {/* Our Services Snapshot */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 md:mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
               Comprehensive fire safety solutions tailored to your needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <Link
                 key={index}
                 href={service.link}
-                className="group relative backdrop-blur-lg bg-white/80 rounded-2xl p-8 border border-gray-200 hover:border-red-500 transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                }}
+                className="group bg-white rounded-xl p-6 md:p-8 border-2 border-gray-200 hover:border-red-600 transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-red-100 hover:-translate-y-1"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 group-hover:scale-105">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <span className="inline-flex items-center text-red-600 font-semibold group-hover:gap-2 transition-all">
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                <div className="w-14 h-14 md:w-16 md:h-16 bg-red-50 rounded-lg flex items-center justify-center text-red-600 mb-4 md:mb-6 group-hover:bg-red-600 group-hover:text-white group-hover:scale-105 group-hover:rotate-3 transition-all duration-200">
+                  {service.icon}
                 </div>
+                <h3 className="text-lg md:text-xl font-bold text-foreground mb-3 group-hover:text-red-600 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground mb-4 text-sm md:text-base leading-relaxed">
+                  {service.description}
+                </p>
+                <span className="inline-flex items-center text-red-600 font-semibold text-sm md:text-base group-hover:gap-2 transition-all">
+                  Learn More
+                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 bg-pattern-grid">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Why Choose Us
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
               Your trusted partner in fire safety excellence
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
             {credentials.map((cred, index) => (
               <div
                 key={index}
-                className="backdrop-blur-lg bg-white/90 rounded-2xl p-8 border border-gray-200 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white rounded-xl p-6 md:p-8 border-2 border-gray-200 text-center shadow-md hover:shadow-lg hover:border-blue-500 hover:-translate-y-1 transition-all duration-200 group"
               >
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-600 mx-auto mb-4">
+                <div className="w-14 h-14 md:w-16 md:h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 transition-all duration-200">
                   {cred.icon}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-base md:text-lg font-bold text-foreground mb-2 group-hover:text-blue-600 transition-colors">
                   {cred.title}
                 </h3>
-                <p className="text-gray-600 text-sm">{cred.description}</p>
+                <p className="text-muted-foreground text-sm">
+                  {cred.description}
+                </p>
               </div>
             ))}
           </div>
 
           {/* Contact Info Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="backdrop-blur-lg bg-gradient-to-br from-red-50/80 to-white/80 rounded-2xl p-6 border border-red-200 shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl p-6 border-2 border-red-200 shadow-md hover:shadow-lg hover:border-red-600 hover:scale-105 transition-all duration-200">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white">
+                <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white flex-shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-600 font-semibold">
+                <div className="min-w-0">
+                  <p className="text-sm text-muted-foreground font-semibold mb-1">
                     Call Us Now
                   </p>
                   <a
                     href="tel:+94771202780"
-                    className="text-lg font-bold text-red-600 hover:text-red-700"
+                    className="text-base md:text-lg font-bold text-red-600 hover:text-red-700 transition-colors break-all"
                   >
                     077-120-2780
                   </a>
                 </div>
               </div>
             </div>
-            <div className="backdrop-blur-lg bg-gradient-to-br from-blue-50/80 to-white/80 rounded-2xl p-6 border border-blue-200 shadow-lg">
+            <div className="bg-white rounded-xl p-6 border-2 border-blue-200 shadow-md hover:shadow-lg hover:border-blue-600 hover:scale-105 transition-all duration-200">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white flex-shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-600 font-semibold">
+                <div className="min-w-0">
+                  <p className="text-sm text-muted-foreground font-semibold mb-1">
                     Email Us
                   </p>
                   <a
                     href="mailto:info@newkandyfire.lk"
-                    className="text-lg font-bold text-blue-600 hover:text-blue-700"
+                    className="text-base md:text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors break-all"
                   >
                     info@newkandyfire.lk
                   </a>
@@ -332,22 +364,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Us Brief */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="backdrop-blur-lg bg-white/80 rounded-3xl p-8 md:p-12 border border-gray-200 shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  About <br />
-                  <span className="text-red-600">New Kandy Fire</span>
+          <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-12 border-2 border-red-200 shadow-lg hover:shadow-xl hover:border-red-600 transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+                  About <span className="text-red-600">New Kandy Fire</span>
                 </h2>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                   New Kandy Fire has been dedicated since 2015 to delivering
                   end-to-end fire protection in Sri Lanka—from system design and
                   installation to maintenance and training.
                 </p>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                   Based in Kadugannawa, we support residential, commercial and
                   industrial clients with prompt service and certified
                   equipment. Our commitment to safety excellence has made us a
@@ -355,14 +385,13 @@ export default function Home() {
                 </p>
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   Learn More About Us
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-gray-900/40"></div>
+              <div className="relative h-64 md:h-96 rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-4 border-red-100">
                 <Image
                   src="/images/home-team.jpg"
                   alt="New Kandy Fire Team"
@@ -375,44 +404,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Training Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-red-pattern">
         <div className="max-w-7xl mx-auto">
-          <div className="backdrop-blur-lg bg-gradient-to-br from-red-500 to-red-500 rounded-3xl p-8 md:p-12 border border-red-800 shadow-2xl text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-12 border-2 border-white/20 shadow-2xl text-white hover:bg-white/15 transition-all duration-500">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
                   Fire Safety Training Programs
                 </h2>
-                <p className="text-xl text-red-50 mb-6 leading-relaxed">
+                <p className="text-base md:text-xl leading-relaxed opacity-95">
                   We provide comprehensive fire safety training for your staff,
                   including practical drills and emergency preparedness. Equip
                   your team with the knowledge and skills to respond effectively
                   in critical situations.
                 </p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3">
                   {[
                     "Practical fire drill training",
                     "Emergency evacuation procedures",
                     "Fire extinguisher operation",
                     "First aid and safety protocols",
                   ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-6 h-6 text-red-200 flex-shrink-0" />
-                      <span className="text-lg">{item}</span>
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300"
+                    >
+                      <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-0.5 opacity-90" />
+                      <span className="text-sm md:text-lg">{item}</span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-full font-bold hover:bg-red-50 transition-all duration-300 shadow-lg"
+                  className="inline-flex items-center gap-2 bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Book Training Session
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 to-gray-900/40"></div>
+              <div className="relative h-64 md:h-96 rounded-xl md:rounded-2xl overflow-hidden shadow-lg order-first lg:order-last hover:scale-105 transition-transform duration-300 border-4 border-white/30">
                 <Image
                   src="/images/home-training.jpg"
                   alt="Fire Safety Training"
@@ -425,52 +455,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Past Projects */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 md:mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Our Past Projects
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Trusted by Sri Lanka&apos;s leading brands and organizations
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+              Trusted by Sri Lanka's leading brands and organizations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="group backdrop-blur-lg bg-white/90 rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className="group bg-white rounded-xl md:rounded-2xl overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg hover:shadow-red-100 hover:border-red-600 hover:-translate-y-1 transition-all duration-200"
               >
                 {/* Project Image */}
-                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-red-100 to-gray-100">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+                <div className="relative h-48 md:h-56 overflow-hidden bg-muted">
                   <Image
-                    src={project.image}
+                    src={project.image || "/placeholder.svg"}
                     alt={project.name}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 group-hover:rotate-1 transition-all duration-500"
                   />
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="backdrop-blur-md bg-white/20 text-white px-3 py-1 rounded-full text-sm font-semibold border border-white/30">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-3 right-3 md:top-4 md:right-4">
+                    <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs md:text-sm font-semibold border border-gray-200 group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 transition-all duration-300">
                       {project.category}
                     </span>
                   </div>
                 </div>
 
                 {/* Project Info */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                <div className="p-5 md:p-6 space-y-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-red-600 transition-colors">
                     {project.name}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
                 </div>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/0 to-red-600/0 group-hover:from-red-600/5 group-hover:to-transparent transition-all duration-300 pointer-events-none rounded-2xl" />
               </div>
             ))}
           </div>
@@ -479,7 +505,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 backdrop-blur-lg bg-white/80 text-red-600 px-8 py-4 rounded-full font-bold text-lg border-2 border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-base md:text-lg border-2 border-red-600 hover:bg-white hover:text-red-600 hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
             >
               View All Projects
               <ArrowRight className="w-5 h-5" />
@@ -488,26 +514,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-900 via-red-800 to-gray-900"></div>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="backdrop-blur-lg bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-12 border-2 border-white/10 space-y-6 md:space-y-8 hover:bg-white/10 hover:border-white/20 transition-all duration-500">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-balance">
               Need Fire Safety Consultation?
             </h2>
-            <p className="text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-white/90 max-w-2xl mx-auto text-pretty">
               Get a free safety audit and expert recommendations for your
               property
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white text-red-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-white/20 transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-white text-red-900 px-8 py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-red-600 hover:text-white hover:scale-105 transition-all duration-200 shadow-md hover:shadow-red-500/50"
             >
               Request Free Audit
               <ArrowRight className="w-5 h-5" />
