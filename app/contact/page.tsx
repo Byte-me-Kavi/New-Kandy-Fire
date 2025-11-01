@@ -151,7 +151,7 @@ export default function ContactPage() {
               Send Us a Message
             </h2>
             <p className="text-lg text-muted-foreground">
-              Fill out the form below and we'll get back to you as soon as
+              Fill out the form below and we&apos;ll get back to you as soon as
               possible.
             </p>
           </div>
@@ -284,7 +284,8 @@ export default function ContactPage() {
               {submitStatus === "success" && (
                 <div className="bg-green-50 border-2 border-green-600 rounded-lg p-4">
                   <p className="text-green-800 font-semibold">
-                    ✓ Message sent successfully! We'll get back to you soon.
+                    ✓ Message sent successfully! We&apos;ll get back to you
+                    soon.
                   </p>
                 </div>
               )}
@@ -349,7 +350,8 @@ export default function ContactPage() {
               Business Hours
             </h2>
             <p className="text-lg text-muted-foreground">
-              We're here to help during business hours and 24/7 for emergencies
+              We&apos;re here to help during business hours and 24/7 for
+              emergencies
             </p>
           </div>
 

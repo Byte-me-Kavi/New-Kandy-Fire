@@ -6,7 +6,6 @@ import {
   Flame,
   AlertTriangle,
   Award,
-  Users,
   Target,
   CheckCircle2,
   Facebook,
@@ -44,7 +43,7 @@ export default function AboutPage() {
       icon: <AlertTriangle className="w-8 h-8" />,
       title: "Danger Management",
       description:
-        "Managing your building means managing your building's fire protection.",
+        "Managing your building means managing your building&apos;s fire protection.",
       color: "text-yellow-600",
       bgColor: "bg-yellow-50",
     },
@@ -122,10 +121,10 @@ export default function AboutPage() {
                 inspection, and commissioning.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Since 2015, New Kandy Fire has been Sri Lanka's trusted partner
-                in fire safety solutions. We combine technical expertise with a
-                commitment to protecting lives and property across industrial,
-                commercial, and residential sectors.
+                Since 2015, New Kandy Fire has been Sri Lanka&apos;s trusted
+                partner in fire safety solutions. We combine technical expertise
+                with a commitment to protecting lives and property across
+                industrial, commercial, and residential sectors.
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -239,10 +238,10 @@ export default function AboutPage() {
                 Our Vision
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                To be Sri Lanka's most trusted fire safety partner, recognized
-                for excellence in service delivery, technical expertise, and
-                commitment to safeguarding communities. We aim to set new
-                benchmarks in fire protection across all sectors.
+                To be Sri Lanka&apos;s most trusted fire safety partner,
+                recognized for excellence in service delivery, technical
+                expertise, and commitment to safeguarding communities. We aim to
+                set new benchmarks in fire protection across all sectors.
               </p>
             </div>
           </div>
@@ -327,8 +326,8 @@ export default function AboutPage() {
             Partner With Us Today
           </h2>
           <p className="text-lg mb-8 opacity-90">
-            Experience the difference of working with Sri Lanka's leading fire
-            safety experts. Get a free consultation and discover how we can
+            Experience the difference of working with Sri Lanka&apos;s leading
+            fire safety experts. Get a free consultation and discover how we can
             protect what matters most to you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

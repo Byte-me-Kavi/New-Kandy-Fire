@@ -462,7 +462,7 @@ export default function Home() {
               Our Past Projects
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Trusted by Sri Lanka's leading brands and organizations
+              Trusted by Sri Lanka&apos;s leading brands and organizations
             </p>
           </div>
 

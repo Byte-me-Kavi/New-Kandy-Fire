@@ -50,7 +50,7 @@ export default function HeroSlider() {
     return () => {
       if (timerRef.current) window.clearInterval(timerRef.current);
     };
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="w-full overflow-hidden rounded-2xl">

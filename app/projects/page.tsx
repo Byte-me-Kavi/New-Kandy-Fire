@@ -166,16 +166,6 @@ export default function ProjectsPage() {
     },
   ];
 
-  const categories = [
-    "All",
-    "Healthcare",
-    "Hospitality",
-    "Manufacturing",
-    "Food & Beverage",
-    "Commercial",
-    "Government",
-  ];
-
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
