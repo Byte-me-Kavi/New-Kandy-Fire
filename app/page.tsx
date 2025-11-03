@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroSlider from "./components/HeroSlider";
+import HeroTitle from "./components/HeroTitle";
 import {
   Flame,
   Shield,
@@ -141,8 +142,8 @@ export default function Home() {
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Text Content */}
-            <div className="space-y-6">
+            {/* Left Side - Text Content (on mobile we show slider first) */}
+            <div className="space-y-6 order-last lg:order-first">
               {/* Trust Badge */}
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-red-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                 <Shield className="w-5 h-5" />
@@ -153,20 +154,14 @@ export default function Home() {
 
               {/* Main Heading */}
               <div className="space-y-4">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 leading-[1.1]">
-                  Your Safety
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-red-700">
-                    Our Priority
-                  </span>
-                </h1>
+                <HeroTitle />
                 <div className="w-24 h-1.5 bg-gradient-to-r from-red-600 to-orange-600 rounded-full shadow-md" />
               </div>
 
               {/* Description */}
               <p className="text-xl text-gray-700 leading-relaxed max-w-xl">
                 Complete fire protection solutions across Sri Lanka. From
-                advanced detection systems to comprehensive training programs—we
+                advanced detection systems to comprehensive training programs we
                 protect what matters most.
               </p>
 
@@ -193,7 +188,7 @@ export default function Home() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
                   <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                    <div className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
                       10+
                     </div>
                     <div className="text-sm text-gray-600 font-semibold mt-1">
@@ -204,7 +199,7 @@ export default function Home() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
                   <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                    <div className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
                       500+
                     </div>
                     <div className="text-sm text-gray-600 font-semibold mt-1">
@@ -215,7 +210,7 @@ export default function Home() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
                   <div className="relative bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-red-600 hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                    <div className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
                       24/7
                     </div>
                     <div className="text-sm text-gray-600 font-semibold mt-1">
@@ -226,8 +221,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Side - Hero Slider with Enhanced Design */}
-            <div className="relative -mt-12 lg:ml-8">
+            {/* Right Side - Hero Slider with Enhanced Design (mobile first) */}
+            <div className="relative mb-8 mt-0 lg:-mt-12 lg:ml-8 order-first lg:order-last">
               {/* Glow effect behind slider */}
               <div className="absolute inset-0 bg-gradient-to-tr from-red-500/20 to-orange-500/20 blur-3xl rounded-full scale-110" />
 
@@ -237,7 +232,7 @@ export default function Home() {
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -bottom-16 -left-6 bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-4 rounded-xl shadow-2xl border-4 border-white hover:scale-110 transition-transform">
+              <div className="absolute -bottom-16 -left-3 lg:-left-6 bg-gradient-to-r from-red-600 to-orange-600 text-white px-4 py-3 lg:px-6 lg:py-4 rounded-xl shadow-2xl border-4 border-white hover:scale-110 transition-transform">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                     <Flame className="w-6 h-6" />
