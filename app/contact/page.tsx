@@ -1,54 +1,120 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Script from "next/script";
 import { Phone, Mail, MapPin, Clock, Send, Building2 } from "lucide-react";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    subject: "",
-    message: "",
-  });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const subjectRef = useRef<HTMLSelectElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^[0-9\s\-\+\(\)]{10,}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const validateForm = (formData: FormData) => {
+    const newErrors: { [key: string]: string } = {};
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+    const hCaptchaResponse = formData.get("h-captcha-response") as string;
+
+    if (!name || name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long";
+    }
+
+    if (!email || !validateEmail(email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!phone || !validatePhone(phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+
+    if (!subject) {
+      newErrors.subject = "Please select a subject";
+    }
+
+    if (!message || message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long";
+    }
+
+    if (!hCaptchaResponse) {
+      newErrors.captcha = "Please complete the captcha verification";
+    }
+
+    return newErrors;
+  };
+
+  const focusFirstError = (validationErrors: { [key: string]: string }) => {
+    if (validationErrors.name) {
+      nameRef.current?.focus();
+    } else if (validationErrors.email) {
+      emailRef.current?.focus();
+    } else if (validationErrors.phone) {
+      phoneRef.current?.focus();
+    } else if (validationErrors.subject) {
+      subjectRef.current?.focus();
+    } else if (validationErrors.message) {
+      messageRef.current?.focus();
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrors({});
 
-    // Simulate form submission
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        message: "",
+      focusFirstError(validationErrors);
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitStatus("idle"), 5000);
-    }, 1500);
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus("success");
+        form.reset();
+        setTimeout(() => setSubmitStatus("idle"), 5000);
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,7 +138,7 @@ export default function ContactPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b mt-30 from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 -mt-32 mb-2">
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-red-600">
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-3 border-red-600">
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
                 <Mail className="w-6 h-6 text-red-600" />
               </div>
@@ -87,7 +153,7 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-red-600">
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-3 border-red-600">
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
                 <Phone className="w-6 h-6 text-red-600" />
               </div>
@@ -116,7 +182,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-red-600">
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-3 border-red-600">
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6 text-red-600" />
               </div>
@@ -128,7 +194,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-red-600">
+            <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-3 border-red-600">
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
                 <Building2 className="w-6 h-6 text-red-600" />
               </div>
@@ -157,7 +223,14 @@ export default function ContactPage() {
           </div>
 
           <div className="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form noValidate onSubmit={handleSubmit} className="space-y-6">
+              {/* Web3Forms Access Key */}
+              <input
+                type="hidden"
+                name="access_key"
+                value="b97939ea-81c4-4ecf-b719-93bc130efc62"
+              />
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -170,12 +243,18 @@ export default function ContactPage() {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    ref={nameRef}
                     required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors"
+                    className={`w-full px-4 py-3 rounded-lg border-2 ${
+                      errors.name
+                        ? "border-red-500 focus:border-red-600"
+                        : "border-gray-200 focus:border-red-600"
+                    } focus:ring-0 outline-none transition-colors`}
                     placeholder="Kavindu Bandara"
                   />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                  )}
                 </div>
 
                 <div>
@@ -189,12 +268,18 @@ export default function ContactPage() {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    ref={emailRef}
                     required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors"
+                    className={`w-full px-4 py-3 rounded-lg border-2 ${
+                      errors.email
+                        ? "border-red-500 focus:border-red-600"
+                        : "border-gray-200 focus:border-red-600"
+                    } focus:ring-0 outline-none transition-colors`}
                     placeholder="email@example.com"
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -210,12 +295,18 @@ export default function ContactPage() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
+                    ref={phoneRef}
                     required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors"
+                    className={`w-full px-4 py-3 rounded-lg border-2 ${
+                      errors.phone
+                        ? "border-red-500 focus:border-red-600"
+                        : "border-gray-200 focus:border-red-600"
+                    } focus:ring-0 outline-none transition-colors`}
                     placeholder="077 123 4567"
                   />
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                  )}
                 </div>
 
                 <div>
@@ -229,8 +320,6 @@ export default function ContactPage() {
                     type="text"
                     id="company"
                     name="company"
-                    value={formData.company}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors"
                     placeholder="Your Company"
                   />
@@ -247,10 +336,13 @@ export default function ContactPage() {
                 <select
                   id="subject"
                   name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
+                  ref={subjectRef}
                   required
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors"
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.subject
+                      ? "border-red-500 focus:border-red-600"
+                      : "border-gray-200 focus:border-red-600"
+                  } focus:ring-0 outline-none transition-colors`}
                 >
                   <option value="">Select a subject</option>
                   <option value="quote">Request a Quote</option>
@@ -260,6 +352,9 @@ export default function ContactPage() {
                   <option value="inspection">Fire Safety Inspection</option>
                   <option value="other">Other Inquiry</option>
                 </select>
+                {errors.subject && (
+                  <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
+                )}
               </div>
 
               <div>
@@ -272,13 +367,29 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  ref={messageRef}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-red-600 focus:ring-0 outline-none transition-colors resize-none"
+                  className={`w-full px-4 py-3 rounded-lg border-2 ${
+                    errors.message
+                      ? "border-red-500 focus:border-red-600"
+                      : "border-gray-200 focus:border-red-600"
+                  } focus:ring-0 outline-none transition-colors resize-none`}
                   placeholder="Tell us about your fire safety needs..."
                 />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                )}
+              </div>
+
+              {/* hCaptcha */}
+              <div>
+                <div className="h-captcha" data-captcha="true"></div>
+                {errors.captcha && (
+                  <p className="mt-2 text-sm text-red-600 font-semibold">
+                    {errors.captcha}
+                  </p>
+                )}
               </div>
 
               {submitStatus === "success" && (
@@ -286,6 +397,15 @@ export default function ContactPage() {
                   <p className="text-green-800 font-semibold">
                     ✓ Message sent successfully! We&apos;ll get back to you
                     soon.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="bg-red-50 border-2 border-red-600 rounded-lg p-4">
+                  <p className="text-red-800 font-semibold">
+                    ✗ Failed to send message. Please try again or contact us
+                    directly.
                   </p>
                 </div>
               )}
@@ -401,6 +521,12 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Load Web3Forms and hCaptcha scripts */}
+      <Script
+        src="https://web3forms.com/client/script.js"
+        strategy="lazyOnload"
+      />
     </main>
   );
 }

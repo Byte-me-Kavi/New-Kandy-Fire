@@ -4,11 +4,11 @@ export default function LoadingSpinner() {
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
       <div className="relative flex flex-col items-center">
-        {/* Animated Fire Icon with Flames */}
-        <div className="relative mb-2">
+        {/* Animated Fire Icon with Shine Effect */}
+        <div className="relative mb-2 w-32 h-32">
           {/* Main Fire SVG */}
           <svg
-            className="w-32 h-32 text-red-600 relative z-10 animate-fire-flicker"
+            className="w-32 h-32 text-red-600 relative z-10"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             width="268"
@@ -23,15 +23,20 @@ export default function LoadingSpinner() {
               height="307"
             />
           </svg>
+
+          {/* Glass/Shine Effect Overlay */}
+          <div className="absolute inset-0 overflow-hidden rounded-full z-20 pointer-events-none">
+            <div className="absolute inset-0 shine-sweep"></div>
+          </div>
         </div>
 
-        {/* Loading text */}
-        <div className="mt-1">
-          <div className="flex items-center justify-center space-x-2 mt-4">
-            <div className="w-2 h-2 bg-red-600 rounded-full dot-bounce animation-delay-neg-600"></div>
-            <div className="w-2 h-2 bg-red-600 rounded-full dot-bounce animation-delay-neg-400"></div>
-            <div className="w-2 h-2 bg-red-600 rounded-full dot-bounce animation-delay-neg-200"></div>
-            <div className="w-2 h-2 bg-red-600 rounded-full dot-bounce"></div>
+        {/* Loading dots */}
+        <div className="mt-8">
+          <div className="flex items-center justify-center space-x-3">
+            <div className="w-3 h-3 bg-gradient-to-br from-red-500 to-red-700 rounded-full animate-[wave_1s_ease-in-out_infinite] shadow-lg"></div>
+            <div className="w-3 h-3 bg-gradient-to-br from-red-500 to-red-700 rounded-full animate-[wave_1s_ease-in-out_0.12s_infinite] shadow-lg"></div>
+            <div className="w-3 h-3 bg-gradient-to-br from-red-500 to-red-700 rounded-full animate-[wave_1s_ease-in-out_0.24s_infinite] shadow-lg"></div>
+            <div className="w-3 h-3 bg-gradient-to-br from-red-500 to-red-700 rounded-full animate-[wave_1s_ease-in-out_0.36s_infinite] shadow-lg"></div>
           </div>
         </div>
       </div>
